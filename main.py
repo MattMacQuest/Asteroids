@@ -29,6 +29,9 @@ def main():
         # Fill the screen with a single color (black in this case)
         pygame.Surface.fill(screen, (0, 0, 0))
         
+        # Update player
+        player.update(dt)
+        
         # Draw player
         player.draw(screen)
         
