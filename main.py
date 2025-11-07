@@ -4,6 +4,7 @@ from logger import log_state, log_event
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 import sys
 
 def main():
@@ -13,9 +14,11 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     
+    # Create groups
     asteroids = pygame.sprite.Group()
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
     
     # Create new static Player containers
     Player.containers = (updatable, drawable)
@@ -25,6 +28,9 @@ def main():
     
     # Create new static AsteroidField container
     AsteroidField.containers = (updatable)
+    
+    # Create new static shots container
+    Shot.containers = (shots, drawable, updatable)
     
     # Creates the screen with size WIDTH and HEIGHT
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -48,7 +54,7 @@ def main():
         # Fill the screen with a single color (black in this case)
         pygame.Surface.fill(screen, (0, 0, 0))
         
-        # Update player
+        # Update objects
         updatable.update(dt)
         
         # Check for collisions
