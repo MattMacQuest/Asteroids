@@ -10,6 +10,12 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    
+    # Create new static Player containers
+    Player.containers = (updatable, drawable)
+    
     # Creates the screen with size WIDTH and HEIGHT
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     
@@ -30,10 +36,12 @@ def main():
         pygame.Surface.fill(screen, (0, 0, 0))
         
         # Update player
-        player.update(dt)
+        updatable.update(dt)
         
         # Draw player
-        player.draw(screen)
+        # player.draw(screen)
+        for item in drawable:
+            item.draw(screen)
         
         # Updates all elements on the screen
         pygame.display.flip()
